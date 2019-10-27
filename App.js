@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
+import axios from 'axios';
 
 import Header from './src/components/Header';
-import axios from 'axios';
+import PeopleList from './src/components/PeopleList'
 
 /*
   Classe principal da aplicação
@@ -40,10 +41,7 @@ export default class App extends Component {
     retornando uma lista pronta
   */
   renderList(){
-   const textElements = this.state.peoples.map(people => {
-    const { first } = people.name;
-    return <Text key = { first } >{ first }</Text>;
-   })
+   
    return textElements;
   }
 
@@ -54,7 +52,7 @@ export default class App extends Component {
     return (
       <View>
         <Header title="Header Pessoa" />
-        {this.renderList()}
+        <PeopleList peoples={this.state.peoples}  />
       </View>
     );
   }
