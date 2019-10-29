@@ -7,12 +7,16 @@ import { capitalizeFirstLetter } from '../util'
 /*
     Componente responsavel por receber da PeopleList uma pessoa, 
     exibir e estilizar a linha
+    Veja que PeopleListItem recebe navigateToPeopleDetail de PeopleList e executa o mesmo
 */
 const PeopleListItem = props => {
-    const { people } = props;
+    const { people, navigateToPeopleDetail } = props;
     const { title, first, last } = people.name;
     return (
-        <TouchableOpacity onPress={() => console.log("Clicou")} >
+        <TouchableOpacity onPress={() => {
+            navigateToPeopleDetail() // Direciona para apage PeopleDetailPage
+            console.log("Clicou")
+        }} >
             <View style={styles.line}>
                 <Image style={styles.avatar} source={{uri: people.picture.thumbnail}} />
                 <Text style={styles.lineText}>

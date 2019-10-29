@@ -43,11 +43,17 @@ export default class PeoplePage extends React.Component {
 
   /*
     Função responsavel por exibir na tela as informações
+    Veja que o PeoplePage esta passando o onPressItem para a PeopleList
   */
   render(){
     return (
       <View>
-        <PeopleList peoples={this.state.peoples}  />
+        <PeopleList 
+        peoples={this.state.peoples}  
+        onPressItem={() => {
+          this.props.navigation.navigate('PeopleDetail')
+        }}
+        />
       </View>
     );
   }

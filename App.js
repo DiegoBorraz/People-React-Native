@@ -3,10 +3,19 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import PeoplePage from './src/pages/PeoplePage';
+import PeopleDetailPage from './src/pages/PeopleDetailPage';
+
+/*
+  Classe App responsavel pela navegação de paginas
+  defaultNavigationOptions responsavel por estilizar o Header nativo do StackNAvigator
+*/
 
 const AppNavigator = createStackNavigator({
   'Main': {
     screen: PeoplePage
+  },
+  'PeopleDetail': {
+    screen: PeopleDetailPage
   },
 }, {
   defaultNavigationOptions: {
