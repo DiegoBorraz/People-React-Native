@@ -41,7 +41,9 @@ export default class PeoplePage extends React.Component {
       });
     }, 1500)
   }
-  
+  /*
+    Função que verifica através do state se a lista já foi carregada, se não, exibe um loading ou se deu erro
+  */
   renderPage(){
     if(this.state.loading){
       return <ActivityIndicator size="large" color="#6ca2f7" />;
@@ -50,6 +52,7 @@ export default class PeoplePage extends React.Component {
       return <Text style={styles.error}>Ops... Algo deu errado</Text>;
     }
     return (
+      //Veja que o PeoplePage esta passando o onPressItem para a PeopleList
       <PeopleList 
         peoples={this.state.peoples}  // Recebendo o peoples
         onPressItem={( pageParams ) => { //Dispara função de navegação
@@ -61,7 +64,6 @@ export default class PeoplePage extends React.Component {
 
   /*
     Função responsavel por exibir na tela as informações
-    Veja que o PeoplePage esta passando o onPressItem para a PeopleList
   */
   render(){
     return (
