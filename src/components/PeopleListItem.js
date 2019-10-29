@@ -14,7 +14,7 @@ const PeopleListItem = props => {
     const { title, first, last } = people.name;
     return (
         <TouchableOpacity onPress={() => {
-            navigateToPeopleDetail() // Direciona para apage PeopleDetailPage
+            navigateToPeopleDetail({ people }); // Direciona para apage PeopleDetailPage
             console.log("Clicou")
         }} >
             <View style={styles.line}>
