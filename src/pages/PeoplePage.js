@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View  } from 'react-native';
 import axios from 'axios';
 
 import PeopleList from '../components/PeopleList'
@@ -14,9 +14,9 @@ export default class PeoplePage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      peoples: [
-
-      ]
+      peoples: [],
+      loading: false,
+      error: false
     }
   }
   /*
@@ -25,21 +25,39 @@ export default class PeoplePage extends React.Component {
     e seta no state atravéz do setState()
   */
   componentDidMount(){
-    axios.get('https://randomuser.me/api/?nat=br&results=5')
-    .then(response => {
-      const {results} =  response.data;
-      this.setState({
-        peoples: results
-      })
-    });
+    this.setState({loading: true})
+    setTimeout(() => { // Crio um delay de 1500 milesegundos
+      axios.get('https://randomuser.me/api/?nat=br&results=35')
+      .then(response => {
+        const {results} =  response.data;
+        this.setState({
+          peoples: results,
+          loading: false,
+        })
+      }).catch(error => {
+        this.setState({
+          loading: false,
+          error: true})
+      });
+    }, 1500)
   }
-  /*
-    Função com a responsabilidade de transformar as as informações do state em lista de pessoas
-    retornando uma lista pronta
-  */
-  renderList(){ 
-   return textElements;
+  
+  renderPage(){
+    if(this.state.loading){
+      return <ActivityIndicator size="large" color="#6ca2f7" />;
+    } 
+    if(this.state.error){
+      return <Text style={styles.error}>Ops... Algo deu errado</Text>;
+    }
+    return (
+      <PeopleList 
+        peoples={this.state.peoples}  // Recebendo o peoples
+        onPressItem={( pageParams ) => { //Dispara função de navegação
+          this.props.navigation.navigate('PeopleDetail', pageParams);
+        }} />
+    );
   }
+  
 
   /*
     Função responsavel por exibir na tela as informações
@@ -47,16 +65,20 @@ export default class PeoplePage extends React.Component {
   */
   render(){
     return (
-      <View>
-        <PeopleList 
-        peoples={this.state.peoples}  // Recebendo o peoples
-        onPressItem={( pageParams ) => { //Dispara função de navegação
-          this.props.navigation.navigate('PeopleDetail', pageParams);
-        }}
-        />
+      <View style={styles.container}>
+        {this.renderPage() }  
       </View>
     );
   }
 }
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  error: {
+    color: 'red',
+    alignSelf: 'center'
+  }
+})
 

@@ -10,7 +10,7 @@ const Line = ({ label = "" , content = ""}) => { // default = "" previne erro de
             <Text style={ [
                 styles.cell,
                 styles.label,
-                label.length > 8 ? styles.longLabel : null // Verifica a quantidade de caracteres, se for maior de 8, adiciona o style do longLabel
+                label.length > 20 ? styles.longLabel : null // Verifica a quantidade de caracteres, se for maior de 8, adiciona o style do longLabel
             ]}>{ label }</Text>
             <Text style={ [styles.cell, styles.content]}>{ content }</Text>
         </View>
@@ -26,16 +26,16 @@ const styles = StyleSheet.create({
         borderColor: '#C5C5C5'
     },
     cell: {
-        fontSize: 18,
+        fontSize: 14,
         paddingLeft: 5,
         //borderWidth: 1
     },
     label: {
         fontWeight: 'bold',
-        flex: 1
+        flex: 2
     },
     content: {
-        flex: 3
+        flex: 4
     },
     longLabel: {
         fontSize: 12
